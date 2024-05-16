@@ -1,12 +1,13 @@
-/** @type {import('jest').Config} */
+/** @type {import('@jest/types').Config.InitialOptions} */
 const config = {
-  projects: ['<rootDir>/design-system', '<rootDir>/packages/keystatic'],
-  collectCoverageFrom: [
-    '**/packages/**/*.{ts,tsx}',
-    '!**/dist/**',
-    '!**/{*.stories.tsx,index.ts,types.ts}',
-  ],
-  verbose: true,
+  displayName: 'keystatic',
+  testEnvironment: 'jsdom',
+  clearMocks: true,
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
+  transform: {
+    '^.+\\.[tj]sx?$': ['babel-jest', { rootMode: 'upward' }],
+  },
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
 };
 
-module.exports = config;
+export default config;
